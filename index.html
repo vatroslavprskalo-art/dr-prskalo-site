@@ -61,7 +61,7 @@
 <span>Découvrir l'approche</span>
 <span class="btn-text-rule"></span>
 </a>
-</div><div class="office-notice"><p><strong>Le cabinet ne prend pas de nouveaux patients pour le moment.</strong> Demandes exclusivement via la messagerie Doctolib. Horaires, absences et tarifs : le profil Doctolib fait foi.</p><p><strong>Urgences :</strong> le cabinet n’assure pas les urgences. En cas d’urgence, vous pouvez contacter le <a href="tel:15">15 (SAMU)</a> ou le <a href="tel:3114">3114</a>.</p><p><strong>Adrien, assistant en ligne :</strong> questions générales uniquement. Ne partagez aucune donnée médicale dans le chat.</p></div>
+</div><div class="office-notice"><p><strong>Le cabinet ne prend pas de nouveaux patients pour le moment.</strong> Demandes exclusivement via la messagerie Doctolib. Horaires, absences et tarifs : le profil Doctolib fait foi.</p><p><strong>Urgences :</strong> le cabinet n’assure pas les urgences. En cas d’urgence, vous pouvez contacter le <a href="tel:15">15 (SAMU)</a> ou le <a href="tel:3114">3114</a>.</p><p><strong>Adrien, assistant virtuel :</strong> il s’agit d’un agent conversationnel automatisé fondé sur l’intelligence artificielle, et non d’une personne. Il répond uniquement aux questions générales relatives au cabinet. Ne partagez aucune donnée médicale dans le chat. <a href="mentions-legales.html#assistant-ia">En savoir plus</a></p></div>
 </div>
 <figure class="hero-figure reveal reveal-delay">
 <span aria-hidden="true" class="figure-frame"></span>
@@ -342,7 +342,7 @@
 </div>
 <div>
 <dt>Convention</dt>
-<dd>Secteur 1<br/><em>Droit permanent à dépassement</em></dd>
+<dd>Médecin conventionné, secteur 1 avec droit permanent à dépassement<br/><em>Les honoraires peuvent excéder le tarif de convention ; le remboursement de l’Assurance maladie reste calculé sur ce tarif. Honoraires habituellement pratiqués : voir le <a class="inline-link" href="https://www.doctolib.fr/psychiatre/valbonne/vatroslav-prskalo" rel="noopener" target="_blank">profil Doctolib</a>.</em><br/>Tiers payant assuré, conformément à la réglementation, aux bénéficiaires de la complémentaire santé solidaire (CSS) et de l’aide médicale de l’État (AME), ainsi qu’aux victimes d’accident du travail ou de maladie professionnelle.</dd>
 </div>
 <div>
 <dt>Rendez-vous</dt>
@@ -360,6 +360,48 @@
 </div>
 </div>
 </section>
+<!-- ============ RDV CALENDLY (INACTIF) ============
+     Module de prise de rendez-vous en ligne Calendly, désactivé pour le moment.
+     ACTIVATION : supprimer l’attribut « hidden » de la balise <section id="rdv-calendly"> ci-dessous,
+     puis publier (Déployer Git sur OVH).
+     Tant que la section est masquée, aucun script Calendly n’est chargé (aucun cookie tiers).
+     Une fois la section visible, le script officiel Calendly (assets.calendly.com/assets/external/widget.js)
+     n’est chargé qu’après un clic du visiteur sur le bouton « Afficher le module de réservation » :
+     le visiteur est ainsi informé avant tout dépôt de cookies par Calendly.
+     Les informations Calendly figurent déjà dans mentions-legales.html (section #calendly) ;
+     y retirer la mention « non activé » lors de l’activation.
+     Page Calendly : https://calendly.com/vatroslav-prskalo
+-->
+<section class="section rdv-calendly" id="rdv-calendly" aria-labelledby="rdv-calendly-titre" hidden>
+<div class="container rdv-calendly-inner">
+<p class="eyebrow"><span class="hairline-x"></span>Rendez-vous</p>
+<h2 class="display-h2" id="rdv-calendly-titre"><span class="line">Prendre rendez-vous</span><span class="line"><em>en ligne</em>.</span></h2>
+<p class="rdv-calendly-note"><strong>Le cabinet ne prend pas de nouveaux patients pour le moment.</strong> Ce module est réservé aux patients déjà suivis.</p>
+<p class="rdv-calendly-note"><strong>Urgences :</strong> le cabinet n’assure pas les urgences. En cas d’urgence, vous pouvez contacter le <a href="tel:15">15 (SAMU)</a> ou le <a href="tel:3114">3114</a>.</p>
+<p class="rdv-calendly-note">Le module de réservation est fourni par Calendly, LLC (États-Unis). En l’affichant, vous acceptez le chargement de ce service tiers, susceptible de déposer des cookies ; voir la <a href="mentions-legales.html#calendly">politique de confidentialité</a>.</p>
+<button class="btn btn-primary" id="rdv-calendly-charger" type="button"><span>Afficher le module de réservation</span></button>
+<!-- Début du widget en ligne Calendly (code officiel ; le script est injecté au clic, voir ci-dessous) -->
+<div class="calendly-inline-widget rdv-calendly-widget" data-url="https://calendly.com/vatroslav-prskalo" style="min-width:320px;height:700px;" hidden></div>
+<!-- Fin du widget en ligne Calendly -->
+</div>
+</section>
+<script>
+  // Calendly : chargement uniquement si la section est visible ET après clic du visiteur.
+  (function () {
+    var section = document.getElementById('rdv-calendly');
+    if (!section || section.hidden) return;
+    var bouton = document.getElementById('rdv-calendly-charger');
+    bouton.addEventListener('click', function () {
+      var widget = section.querySelector('.calendly-inline-widget');
+      widget.hidden = false;
+      bouton.hidden = true;
+      var s = document.createElement('script');
+      s.src = 'https://assets.calendly.com/assets/external/widget.js';
+      s.async = true;
+      document.body.appendChild(s);
+    }, { once: true });
+  })();
+</script>
 <!-- ============ CTA RDV ============ -->
 <section class="section section-cta" id="rdv">
 <span aria-hidden="true" class="watermark watermark-light"><img alt="" src="monogram.png"/></span>
@@ -373,8 +415,8 @@
 <path d="M2.5 11.5 L 11.5 2.5 M 5 2.5 H 11.5 V 9" stroke="currentColor" stroke-linecap="round" stroke-width="1.2"></path>
 </svg>
 </a>
-<p class="cta-fineprint">Professionnels de santé : exclusivement par e-mail à psychiatre@dr-prskalo.fr. Adrien, l’assistant en ligne, répond uniquement aux questions générales. Ne partagez aucune donnée médicale dans le chat ; il ne remplace pas une consultation et ne traite pas les urgences.</p>
-<p class="cta-fineprint">Professionnels de santé : <a href="mailto:psychiatre@dr-prskalo.fr">psychiatre@dr-prskalo.fr</a></p></div>
+<p class="cta-fineprint">Professionnels de santé : exclusivement par e-mail à <a href="mailto:psychiatre@dr-prskalo.fr">psychiatre@dr-prskalo.fr</a>.</p>
+<p class="cta-fineprint">Adrien est un assistant virtuel fondé sur l’intelligence artificielle : il répond uniquement aux questions générales. Ne partagez aucune donnée médicale dans le chat ; il ne remplace pas une consultation et ne traite pas les urgences (<a href="tel:15">15</a> ou <a href="tel:3114">3114</a>).</p></div>
 </section>
 <!-- ============ FOOTER ============ -->
 <footer class="site-footer">
@@ -397,9 +439,10 @@
 <h4>Légal</h4>
 <ul>
 <li><a href="mentions-legales.html">Mentions légales</a></li>
-<li><a href="mentions-legales.html">Confidentialité (RGPD)</a></li>
-<li><a href="mentions-legales.html">Déontologie médicale</a></li>
-<li><a href="mentions-legales.html">Cookies</a></li>
+<li><a href="mentions-legales.html#confidentialite">Confidentialité (RGPD)</a></li>
+<li><a href="mentions-legales.html#deontologie">Déontologie médicale</a></li>
+<li><a href="mentions-legales.html#cookies">Cookies</a></li>
+<li><a href="mentions-legales.html#assistant-ia">Assistant virtuel (IA)</a></li>
 </ul>
 </div>
 <div class="footer-col">
@@ -413,7 +456,7 @@
 </div>
 <div class="container footer-bottom">
 <p>© <em>An.</em> MMXXVI  ·  Dr Vatroslav Prskalo  ·  Tous droits réservés</p>
-<p class="footer-disclaimer"><em>Site informatif — ne se substitue pas à une consultation médicale.</em></p>
+<p class="footer-disclaimer"><em>Site informatif — ne se substitue pas à une consultation médicale. Informations mises à jour le 7 novembre 2026.</em></p>
 </div>
 </footer>
 <script>
